@@ -27,13 +27,18 @@ class Main extends Component {
         if(input === ''){
             return
         }
+        // This REGex will add quotes
+        //  around every key in each object
         let obj = input.replace(/(\s*?{\s*?|\s*?,\s*?)(['"])?([a-zA-Z0-9]+)(['"])?:/g, '$1"$3":');
-        obj = JSON.parse(obj)
-        let input_json = []
-        input_json.push(obj)
-        console.log(input_json)
+        
+        // Once the object is compliant with 
+        // JSON's requirements, we can parse it
+        // We will create an array to store 
+        // All the objects that will be returned
+        let arr_obj = JSON.parse('[' + obj + ']');
+   
         this.setState({
-            input_json: input_json
+            input_json: arr_obj
         })
     }
 
