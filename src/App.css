@@ -1,28 +1,53 @@
+/* FONTS */
+@import url('https://fonts.googleapis.com/css?family=Raleway:200,300,400,500'); /*Raleway*/
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,700'); /*Playfair Display*/
+@import url('https://fonts.googleapis.com/css?family=Berkshire+Swash');
+
+body {
+  background: #fafafa;
+}
+
 .App {
-  text-align: center;
+  overflow-x: hidden;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
+.open-navbar-icon {
+  display: block;
   font-size: 1.5em;
+  margin-right: 2em;
+  margin-top: 50px;
+  text-align: right;    
+  color: #b9b9b9;
+  position: absolute;
+  right: 0;
+  z-index: 2;
 }
 
-.App-intro {
-  font-size: large;
+
+/* Floating Animation */
+
+.floating{
+  float: left;
+  -webkit-animation-name: Floatingx;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  -moz-animation-name: Floating;
+  -moz-animation-duration: 3s;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: ease-in-out;
+  margin-left: 30px;
+  margin-top: 5px;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@-webkit-keyframes Floatingx{
+  from {-webkit-transform:translate(0, 0px);}
+  65% {-webkit-transform:translate(0, 15px);}
+  to {-webkit-transform: translate(0, -0px);    }    
+}
+  
+@-moz-keyframes Floating{
+  from {-moz-transform:translate(0, 0px);}
+  65% {-moz-transform:translate(0, 15px);}
+  to {-moz-transform: translate(0, -0px);}    
 }
