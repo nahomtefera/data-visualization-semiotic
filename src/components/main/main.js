@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {XYFrame} from 'semiotic';
-import Textarea from 'react-textarea-autosize';
+import AutosizeInput from 'react-input-autosize';
+// import Textarea from 'react-textarea-autosize';
 import './main.css';
 
 class Main extends Component {
@@ -8,8 +9,10 @@ class Main extends Component {
         super(props)
 
         this.state={
-            data: ``,
-            title: ``,
+            data: `{}`,
+            title: `Chart Title...`,
+            x_values: `Horizontal Axis`,
+            y_values: `Vertical Axis`,
             input_json: []
         }
 
@@ -18,12 +21,21 @@ class Main extends Component {
     }
     
     handleInput(e){
+        // This method will be reusable 
+        // In multiple input fields
+        // Make sure that the the input fields
+        // Have and id == to the state they connect
+
         let targetId = e.target.id;
         let targetValue = e.target.value;
         let prevState = this.state;
 
+        // Iterate through the state
+        // If the id of the current target
+        // Matches any key in the state
+        // It will update the state
         for(var id in prevState) {
-            if(targetId == id) {
+            if(targetId === id) {
                 this.setState({
                     [id]: e.target.value
                 })
@@ -46,6 +58,7 @@ class Main extends Component {
         // We will create an array to store 
         // All the objects that will be returned
         let arr_obj = JSON.parse('[' + obj + ']');
+        console.log(arr_obj)
    
         this.setState({
             input_json: arr_obj
@@ -59,38 +72,32 @@ class Main extends Component {
                 I will visualize stuff here:    
 
                 <div className="input-container">
-                    <br/><br/><br/><br/>
-                    <input id="title" value={this.state.title} onChange={this.handleInput} placeholder="title" />
-                    <br/>
-                    <Textarea id="data" className="textarea-field" value={this.state.data} onChange={this.handleInput}></Textarea>
+                    <div className="input-inner-container"> 
+                        <AutosizeInput id="title" className="chart-input" value={this.state.title} onChange={this.handleInput}/>
+                        <br/>
+                        <AutosizeInput id="x_values" className="chart-input" value={this.state.x_values} onChange={this.handleInput}/>
+                        <br/>
+                        <AutosizeInput id="y_values" className="chart-input" value={this.state.y_values} onChange={this.handleInput}/>
+                        <br/>
+                        <textarea id="data" className="textarea-field" value={JSON.stringify(JSON.parse(this.state.data), null, 4)} onChange={this.handleInput}></textarea>
+                    </div>
+
                     <br/>
                     <div className="submit-button" onClick={this.handleSubmit}>visualize</div>
                 </div>
 
-                <div className="chart-container">
+                <div style={{"width":"700px"}} className="chart-container">
 
                     <XYFrame
                         title={this.state.title}
                         size={[700, 400]}
                         lines={this.state.input_json}
-                        xAccessor={"week"}
-                        yAccessor={"grossWeekly"}
+                        xAccessor={this.state.x_values}
+                        yAccessor={this.state.y_values}
                         lineStyle={{ stroke: "#00a2ce" }}
                         margin={{ left: 80, bottom: 50, right: 10, top: 40 }}
-                        axes={[
-                        {
-                            orient: "left"
-                        },
-                        {
-                            orient: "bottom"
-                        }
-                        ]}
+                        axes={[{orient: "left"},{orient: "bottom"}]}
                         hoverAnnotation={true}
-                        customHoverBehavior={d => console.log("custom hover d", d)}
-                        customClickBehavior={d => console.log("click on d", d)}
-                        customDoubleClickBehavior={d =>
-                        console.log("custom doubleclick d", d)
-                        }
                     />
                 </div>
             </div>

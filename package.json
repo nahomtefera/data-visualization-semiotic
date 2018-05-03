@@ -6,6 +6,7 @@
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-fontawesome": "^1.6.1",
+    "react-input-autosize": "^2.2.1",
     "react-scripts": "1.1.4",
     "react-scrollchor": "^5.0.2",
     "react-textarea-autosize": "^6.1.0",

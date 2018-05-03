@@ -1,15 +1,36 @@
 .main-container {
     text-align: center;
+    font-family: "Raleway", sans-serif;
 }
 
 .chart-container{
-    display: inline-block
+    margin: 0 auto;
+}
+
+.input-inner-container {
+    text-align: left;
+    display: inline-block;
+}
+
+.chart-input {
+    display: inline-block;
+    margin: 50px;
+    margin-bottom: 0;
+}
+
+.chart-input input{
+    font-size: 1.3em;
+    padding: 10px;
 }
 
 .textarea-field {
     width: 900px;
     min-height: 250px;
     margin: 50px;
+    background: white;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1em;
+    font-weight: bold;
 }
 
 .submit-button {
