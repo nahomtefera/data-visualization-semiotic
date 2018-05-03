@@ -72,21 +72,21 @@ class Main extends Component {
 
                 <div className="input-container">
                     <div className="input-inner-container">
-                        <div className="">
+                        <div className="input-name-and-field">
                             <div className="input-name">
                                 Chart Title
                             </div>
                             <AutosizeInput id="title" className="chart-input" placeholder="Enter Value" value={this.state.title} onChange={this.handleInput}/>
                         </div> 
                         <br/>
-                        <div>
+                        <div className="input-name-and-field">
                             <div className="input-name">
                                 Horizontal Axis
                             </div>
                             <AutosizeInput id="x_values" className="chart-input" placeholder="Enter Value" value={this.state.x_values} onChange={this.handleInput}/>
                         </div>
                         <br/>
-                        <div>
+                        <div className="input-name-and-field">
                             <div className="input-name">
                                 Vertical Axis
                             </div>
