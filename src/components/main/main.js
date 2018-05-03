@@ -9,10 +9,10 @@ class Main extends Component {
         super(props)
 
         this.state={
-            data: `{}`,
-            title: `Chart Title...`,
-            x_values: `Horizontal Axis`,
-            y_values: `Vertical Axis`,
+            data: ``,
+            title: ``,
+            x_values: ``,
+            y_values: ``,
             input_json: []
         }
 
@@ -51,7 +51,7 @@ class Main extends Component {
         }
         // This REGex will add quotes
         //  around every key in each object
-        let obj = data.replace(/(\s*?{\s*?|\s*?,\s*?)(['"])?([a-zA-Z0-9]+)(['"])?:/g, '$1"$3":');
+        let obj = data.replace(/(\s*?{\s*?|\s*?,\s*?)(['"])?([a-zA-Z0-9]+)(['"])?:/g, '$1"$3":').replace(/'/g, '"');
         
         // Once the object is compliant with 
         // JSON's requirements, we can parse it
@@ -69,19 +69,50 @@ class Main extends Component {
         
         return (
             <div className="main-container">
-                I will visualize stuff here:    
 
                 <div className="input-container">
-                    <div className="input-inner-container"> 
-                        <AutosizeInput id="title" className="chart-input" value={this.state.title} onChange={this.handleInput}/>
+                    <div className="input-inner-container">
+                        <div className="">
+                            <div className="input-name">
+                                Chart Title
+                            </div>
+                            <AutosizeInput id="title" className="chart-input" placeholder="Enter Value" value={this.state.title} onChange={this.handleInput}/>
+                        </div> 
                         <br/>
-                        <AutosizeInput id="x_values" className="chart-input" value={this.state.x_values} onChange={this.handleInput}/>
+                        <div>
+                            <div className="input-name">
+                                Horizontal Axis
+                            </div>
+                            <AutosizeInput id="x_values" className="chart-input" placeholder="Enter Value" value={this.state.x_values} onChange={this.handleInput}/>
+                        </div>
                         <br/>
-                        <AutosizeInput id="y_values" className="chart-input" value={this.state.y_values} onChange={this.handleInput}/>
+                        <div>
+                            <div className="input-name">
+                                Vertical Axis
+                            </div>
+                            <AutosizeInput id="y_values" className="chart-input" placeholder="Enter Value" value={this.state.y_values} onChange={this.handleInput}/>
+                        </div>
                         <br/>
-                        <textarea id="data" className="textarea-field" value={JSON.stringify(JSON.parse(this.state.data), null, 4)} onChange={this.handleInput}></textarea>
-                    </div>
+                        <textarea id="data" className="textarea-field" 
+                            // We will try to clean up the textarea
+                            // And format the object to be indented
+                            // If we can't format the input we will just
+                            // Let it be whatever the user inputs
+                            value={((json)=>{
+                                let parsed, format_input;
+                                try{
+                                    format_input = this.state.data.replace(/(\s*?{\s*?|\s*?,\s*?)(['"])?([a-zA-Z0-9]+)(['"])?:/g, '$1"$3":').replace(/'/g, '"');
+                                    parsed = JSON.stringify(JSON.parse(format_input), null, 4);
+                                } catch(e){
+                                    return this.state.data
+                                }
 
+                                return parsed;
+                            })()} 
+                            onChange={this.handleInput}
+                        >
+                        </textarea>
+                    </div>
                     <br/>
                     <div className="submit-button" onClick={this.handleSubmit}>visualize</div>
                 </div>
