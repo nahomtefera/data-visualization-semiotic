@@ -102,13 +102,14 @@ class Main extends Component {
                                 let parsed, format_input;
                                 try{
                                     format_input = this.state.data.replace(/(\s*?{\s*?|\s*?,\s*?)(['"])?([a-zA-Z0-9]+)(['"])?:/g, '$1"$3":').replace(/'/g, '"');
-                                    parsed = JSON.stringify(JSON.parse(format_input), null, 4);
+                                    parsed = JSON.stringify(JSON.parse(format_input), null, 2);
                                 } catch(e){
                                     return this.state.data
                                 }
 
                                 return parsed;
-                            })()} 
+                            })()}
+                            placeholder={`The data must be presented as an array of objects.`} 
                             onChange={this.handleInput}
                         >
                         </textarea>
@@ -117,11 +118,21 @@ class Main extends Component {
                     <div className="submit-button" onClick={this.handleSubmit}>visualize</div>
                 </div>
 
-                <div style={{"width":"700px"}} className="chart-container">
+                <div style={{"width":"900px", "height":"600px"}} className="chart-container">
+                
+                    <div className="chart-type-container">
+                        <div className="chart-type-button chart-type-xy">
+                            XY Frame
+                        </div>
+
+                        <div className="chart-type-button chart-type-of">
+                            Ordinal Frame
+                        </div>
+                    </div>
 
                     <XYFrame
                         title={this.state.title}
-                        size={[700, 400]}
+                        size={[900, 500]}
                         lines={this.state.input_json}
                         xAccessor={this.state.x_values}
                         yAccessor={this.state.y_values}
